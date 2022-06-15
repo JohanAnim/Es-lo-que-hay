@@ -30,7 +30,7 @@ toggle_btn.focus()
 	volume_down = document.querySelector("#down");
 
 setTimeout(() => {
-	toggle_btn.click()
+	sonidoMain.play();
 }, 1000);
 // Función que Contiene todos los atajos de teclado y lo asigna a cada botón
 function addHotkeys() {
