@@ -191,10 +191,11 @@ function toggleMute() {
 }
 
 function hotkeys(text) {
+	navigator.vibrate([100, 50, 100])
 	if (text == "Mostrar los atajos del reproductor") {
 		document.getElementById("hksbtn").textContent = "Ocultar los atajos del reproductor";
 		document.getElementById("hks").removeAttribute("style");
-		speak("Se muestra la lista de comandos de teclado en la parte de arriba de la pantalla.")
+		speak("Se está mostrando la lista de comandos por teclas en la parte de abajo de este botón.")
 	} else {
 		document.getElementById("hksbtn").textContent = "Mostrar los atajos del reproductor";
 		document.getElementById("hks").setAttribute("style", "display:none");
