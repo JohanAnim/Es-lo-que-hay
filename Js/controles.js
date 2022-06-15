@@ -2,102 +2,83 @@
 // Autor: Johan G()
 
 // variables
-var audio_id, sonidoMain, audio_volume = 1.0, toggle_btn, back_btn, time_p, advance_btn, alert_obj, volume_up, volume_down;
+var sonidoMain, audio_volume = 1.0, toggle_btn, back_btn, time_p, advance_btn, alert_obj, volume_up, volume_down;
 //ejecutamos las instrucciones al terminar de cargarse el documento
+
 document.addEventListener("DOMContentLoaded", function () {
-	// creamos un array con todos los elementos  con el id controls
-	var elements = document.querySelectorAll("#controls");
+if (sonidoMain.paused == false) {
+	toggle_btn.innerHTML= "Pausar";
+	toggle_btn.focus();
+}
+else {
+	toggle_btn.innerHTML= "Reproducir";
+	toggle_btn.focus();
+}
+
+	// creamos un array con todos los elementos  de audio
+	var elements = document.querySelectorAll("audio");
 	// recorremos el array para crear las asignaciones por elemento
 	for (element of elements) {
-		//guardamos en la variable id, el id de cada eqtiqueta audio
-		let id = element.id;
 		//añadimos al elemento audio el evento onTimeUpdate.
 		element.setAttribute("onTimeUpdate", `audioTime("${id}");`);
 
-
-		//añadimos la lista con botones de control luego del elemento audio. Primero creamos un nodo nuevo, le añadimos la lista de controles html y finalmente lo añadimos seguidamente al elemento audio con la función insertAfter.
-		let new_element = document.createElement("div");
-		new_element.innerHTML = `<div class="buttons_list" role="group" aria-label="Controles de reproducción">
-			<button id="${id}_hksbtn" onClick='hotkeys("${id}", this.textContent);'>Mostrar los atajos del reproductor</button><br>
-			<div id="${id}_hks" style="display:none;">
-				<p>Una vez pulsado el botón de reproducción por primera vez, están disponibles los siguientes atajos:</p>
-				<p>Adelantar; (Flecha derecha)</p>
-				<p>Retroceder; (Flecha hisquierda)</p>
-				<p>Subir volúmen; (Flecha arriba)</p>
-				<p>Bajar volúmen; (Flecha abajo)</p>
-				<p>Silenciar y quitar silencio; (m)</p>
-				<p>Verbalizar el tiempo actual y total del audio en curso; (i)</p>
-			</div>
-			<button align="center" id="${id}_toggle" onClick='playPause("${id}");'>Pausar</button><br>
-			<button align="left" id="${id}_back" onClick='timeBack();'>Retroceder 10 segundos</button>
-			<span align="center" id="${id}_time" onClick='speak(this.textContent);'>0:00</span>
-			<button align="right" id="${id}_advance" onClick='timeAdvance();'>Adelantar 10 segundos</button><br>
-			<label>Velocidad de reproducción><input type="range" min="0" max="100" step="10" value="50" onChange='audioRate(this.value)' /></label>
-			<button id="${id}_down" onClick='volumeDown();'>Bajar volúmen</button>
-			<label>
-			<input type="checkbox" id="${id}_toggle_mute" onChange='toggleMute();'>Silenciar sonido
-			</label>
-			<button id="${id}_up" onClick='volumeUp();'>Subir volúmen</button>
-			<div id="${id}_alert" aria-live="assertive"></div>
-		</div>`;
-	insertAfter(element, new_element);
 	}
 });
 
-function insertAfter(element, new_element) {
-	if (element.nextSibling) {
-		element.parentNode.insertBefore(new_element, element.nextSibling);
-	} else {
-		element.parentNode.appendChild(new_element);
-	}
-}
-
 // función que asigna las variables globales los elementos a través de su id
-function getElements(id) {
-	audio_id = id;
-	sonidoMain = document.querySelector(`#${id}`);
-	toggle_btn = document.querySelector(`#${id}_toggle`);
-	back_btn = document.querySelector(`#${id}_back`);
-	time_p = document.querySelector(`#${id}_time`);
-	advance_btn = document.querySelector(`#${id}_advance`);
-	alert_obj = document.querySelector(`#${id}_alert`);
-	volume_up = document.querySelector(`#${id}_up`);
-	toggle_mute = document.querySelector(`#${id}_toggle_mute`);
-	volume_down = document.querySelector(`#${id}_down`);
-}
+
+	sonidoMain = document.querySelector("audio");
+	toggle_btn = document.querySelector("#toggle");
+	back_btn = document.querySelector("#back");
+	time_p = document.querySelector("#time");
+	advance_btn = document.querySelector("#advance");
+	alert_obj = document.querySelector("#alert");
+	volume_up = document.querySelector("#up");
+	toggle_mute = document.querySelector("#toggle_mute");
+	volume_down = document.querySelector("#down");
 
 // Función que Contiene todos los atajos de teclado y lo asigna a cada botón
-function addHotkeys(id) {
-	shortcut.add("up", volumeUp, 
-		 {
+function addHotkeys() {
+	shortcut.add("up", function() {
+		volume_up.click();
+	}, {
 		'propagate':true,
 		'target': document.querySelector(".controles")
 		});
 		volume_up.setAttribute("aria-keyshortcuts", "Flecha arriba");
-		shortcut.add("m", toggleMute, 
-		{
+		shortcut.add("m", function() {
+			toggle_mute.click();
+		}, {
 	   'propagate':true,
 	   'target': document.querySelector(".controles")
 	   });
 	   toggle_mute.setAttribute("aria-keyshortcuts", "M");
 
-	   shortcut.add("down", volumeDown, 
-	   {
+	   shortcut.add("down", function() {
+		volume_down.click();
+	   }, {
 	  'propagate':true,
 	  'target': document.querySelector(".controles")
 	  });
 	  volume_down.setAttribute("aria-keyshortcuts", "Flecha abajo");
 
-	  shortcut.add("Space", playPause,
-	  {
+	  shortcut.add("Space", function() {
+		if(sonidoMain.paused) { 
+			toggle_btn.click();
+			speak("Reproduciendo");
+		} else {
+			toggle_btn.click();
+			speak("Pausado")
+		}
+	  },{
 	 'propagate':true,
 	 'target': document.querySelector(".controles")
 	 });
 	 toggle_btn.setAttribute("aria-keyshortcuts", "Espacio");
-	 toggle_btn.focus()
 
-	 shortcut.add("left", timeBack,
-	 {
+	 shortcut.add("left", function() {
+		back_btn.click();
+	 },{
 	'propagate':true,
 	'target': document.querySelector(".controles")
 	});
@@ -113,19 +94,22 @@ shortcut.add("right", timeAdvance,
 advance_btn.setAttribute("aria-keyshortcuts", "Flecha derecha");
 
 	}
+	document.addEventListener("DOMContentLoaded", addHotkeys);
+	
 	sonidoMain.addEventListener("ended", function() {
 		toggle_btn.innerHTML = "Volver a reproducir";
 		toggle_btn.title = "Volver a reproducir";
 		speak("Finalizado");
 		toggle_btn.focus()
 	});
+	sonidoMain.addEventListener("pause", () => {
+		toggle_btn.innerHTML="Reproducir"
+		toggle_btn.title="Reproducir";
+	});
 
-function playPause(id) {
-	if (id != audio_id) {
-		getElements(id);
-		addHotkeys(id);
-	}
+function playPause() {
 	(sonidoMain.paused)? play() : pause()
+	navigator.vibrate(50);
 }
 
 function play() {
@@ -140,25 +124,25 @@ function pause() {
 	toggle_btn.title= "Reproducir";
 }
 
-function audioTime(id) {
+function audioTime() {
 	let minutos = parseInt(sonidoMain.duration / 60, 10);
 	var segundos = parseInt(sonidoMain.duration % 60);
 	var segundos = (segundos < 10)? `0${segundos}` : segundos;
 	let ACT_minutos = parseInt(sonidoMain.currentTime / 60, 10);
 	var ACT_segundos = parseInt(sonidoMain.currentTime % 60);
 	var ACT_segundos = (ACT_segundos < 10)? `0${ACT_segundos}` : ACT_segundos;
-	time_p.innerHTML = `${ACT_minutos}:${ACT_segundos} de ${minutos}:${segundos}`;
+	document.querySelector("#time").innerHTML = `${ACT_minutos}:${ACT_segundos} de ${minutos}:${segundos}`;
 }
 
 function timeAdvance() {
 	sonidoMain.currentTime += 10.0;
-	let time_capture = time_p.textContent;
+	let time_capture = document.querySelector("#time").textContent;
 	//speak(time_capture);
 }
 
 function timeBack() {
 	sonidoMain.currentTime -= 10;
-	let time_capture = time_p.textContent;
+	let time_capture = document.querySelector("#time").textContent;
 	//speak(time_capture);
 }
 
@@ -200,13 +184,16 @@ function toggleMute() {
 	}
 }
 
-function hotkeys(id, text) {
+function hotkeys(text) {
 	if (text == "Mostrar los atajos del reproductor") {
-		document.getElementById(`${id}_hksbtn`).textContent = "Ocultar los atajos del reproductor";
-		document.getElementById(`${id}_hks`).removeAttribute("style");
+		document.getElementById("hksbtn").textContent = "Ocultar los atajos del reproductor";
+		document.getElementById("hks").removeAttribute("style");
+		speak("Se muestra la lista de comandos de teclado en la parte de arriba de la pantalla.")
 	} else {
-			document.getElementById(`${id}_hksbtn`).textContent = "Mostrar los atajos del reproductor";
-			document.getElementById(`${id}_hks`).setAttribute("style", "display:none");
+		document.getElementById("hksbtn").textContent = "Mostrar los atajos del reproductor";
+		document.getElementById("hks").setAttribute("style", "display:none");
+		speak("Se a ocultado la lista de comandos.")
 	}
-}
+
+	}
 // Linia final
