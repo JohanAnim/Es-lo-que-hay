@@ -121,7 +121,7 @@ advance_btn.setAttribute("aria-keyshortcuts", "Flecha derecha");
 		toggle_btn.innerHTML="Cargando datos";
 		toggle_btn.title="Cargando";
 	});
-sonidoMain.addEventListener("loadedmetadata", () => {
+sonidoMain.addEventListener("suspend", () => {
 		toggle_btn.innerHTML="Audio cargado, pulse para reproducir";
 		toggle_btn.title="atención";
 	});
