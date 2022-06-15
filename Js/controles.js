@@ -6,7 +6,7 @@ var sonidoMain, audio_volume = 1.0, toggle_btn, back_btn, time_p, advance_btn, a
 //ejecutamos las instrucciones al terminar de cargarse el documento
 
 document.addEventListener("DOMContentLoaded", function () {
-
+toggle_btn.focus()
 	// creamos un array con todos los elementos  de audio
 	var elements = document.querySelectorAll("audio");
 	// recorremos el array para crear las asignaciones por elemento
