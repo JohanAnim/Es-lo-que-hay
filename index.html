@@ -23,12 +23,14 @@
                     <p>Subir volúmen; (Flecha arriba)</p>
                     <p>Bajar volúmen; (Flecha abajo)</p>
                     <p>Silenciar y quitar silencio; (m)</p>
-                    <p>Verbalizar el tiempo actual y total del audio en curso; (i)</p>
+                    <p>Verbalizar el tiempo actual y total del audio en curso; (Alt+i)</p>
                 </div>
-                <button align="center" id="toggle" onClick='playPause("${id}");'>Reproducir</button>
-                <button align="left" id="back" onClick='timeBack();'>Retroceder 10 segundos</button>
-                <button align="right" id="advance" onClick='timeAdvance();'>Adelantar 10 segundos</button><br>
-                <span align="center" id="time" onClick='speak(this.textContent);'>0:00</span><br>
+                <div>
+                <button style="text-align: center;" id="toggle" onClick='playPause();'>Reproducir</button>
+                <button style="text-align: left;" id="back" onClick='timeBack();'>Retroceder 10 segundos</button>
+                <button style="text-align: right;" id="advance" onClick='timeAdvance();'>Adelantar 10 segundos</button>
+                </div>
+                <span style="text-align: center;" id="time" onClick='speak(this.textContent);'>0:00</span><br>
                 <label>Velocidad de reproducción><input type="range" min="0" max="100" step="10" value="50" onChange='audioRate(this.value)' /></label>
                 <button id="up" onClick='volumeUp();'>Subir volúmen</button>
                 <label>
