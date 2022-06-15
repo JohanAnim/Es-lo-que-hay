@@ -12,7 +12,7 @@
     </main>
 
     <div class="controles" tabindex="0" aria-label="Aria de Atajos de teclado" role="application"></div>
-        <audio src="http://stream.zeno.fm/16qbsn9ctc9uv" autoplay preload="metadata"></audio>
+        <audio src="http://stream.zeno.fm/16qbsn9ctc9uv" >Su navegador no es compatible con audio html5</audio>
         <div>
             <div class="buttons_list" role="group" aria-label="Controles de reproducción">
                 <button id="hksbtn" onClick='hotkeys(this.textContent)'>Mostrar los atajos del reproductor</button><br>
@@ -25,10 +25,10 @@
                     <p>Silenciar y quitar silencio; (m)</p>
                     <p>Verbalizar el tiempo actual y total del audio en curso; (i)</p>
                 </div>
-                <button align="center" id="toggle" onClick='playPause("${id}");'>Reproducir</button><br>
+                <button align="center" id="toggle" onClick='playPause("${id}");'>Reproducir</button>
                 <button align="left" id="back" onClick='timeBack();'>Retroceder 10 segundos</button>
-                <span align="center" id="time" onClick='speak(this.textContent);'>0:00</span>
                 <button align="right" id="advance" onClick='timeAdvance();'>Adelantar 10 segundos</button><br>
+                <span align="center" id="time" onClick='speak(this.textContent);'>0:00</span><br>
                 <label>Velocidad de reproducción><input type="range" min="0" max="100" step="10" value="50" onChange='audioRate(this.value)' /></label>
                 <button id="up" onClick='volumeUp();'>Subir volúmen</button>
                 <label>
