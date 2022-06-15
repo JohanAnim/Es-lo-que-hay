@@ -7,6 +7,8 @@ var sonidoMain, audio_volume = 1.0, toggle_btn, back_btn, time_p, advance_btn, a
 
 document.addEventListener("DOMContentLoaded", function () {
 toggle_btn.focus()
+sonidoMain.autoplay=true;
+
 	// creamos un array con todos los elementos  de audio
 	var elements = document.querySelectorAll("audio");
 	// recorremos el array para crear las asignaciones por elemento
@@ -29,9 +31,6 @@ toggle_btn.focus()
 	toggle_mute = document.querySelector("#toggle_mute");
 	volume_down = document.querySelector("#down");
 
-setTimeout(() => {
-	sonidoMain.play();
-}, 1000);
 // Función que Contiene todos los atajos de teclado y lo asigna a cada botón
 function addHotkeys() {
 	shortcut.add("up", function() {
@@ -101,9 +100,30 @@ advance_btn.setAttribute("aria-keyshortcuts", "Flecha derecha");
 		toggle_btn.innerHTML="Reproducir"
 		toggle_btn.title="Reproducir";
 	});
-	sonidoMain.addEventListener("play", () => {
+	sonidoMain.addEventListener("error", () => {
+		toggle_btn.innerHTML="Se a producido un error inesperado";
+		if (sonidoMain.NETWORK_EMPTY == (0)) toggle_btn.innerHTML="Se a producido el siguiente error: No se an encontrado datos de transmición de audio";
+		toggle_btn.title="error";
+	});
+	sonidoMain.addEventListener("abort", () => {
+		toggle_btn.innerHTML="Se a producido un incombeniente inesperado.";
+		toggle_btn.title="error";
+	});
+	sonidoMain.addEventListener("waiting", () => {
+		toggle_btn.innerHTML="Cargando..."
+		toggle_btn.title="Cargando...";
+	});
+	sonidoMain.addEventListener("playing", () => {
 		toggle_btn.innerHTML="Pausar"
 		toggle_btn.title="Pausar";
+	});
+	sonidoMain.addEventListener("canplay", () => {
+		toggle_btn.innerHTML="Cargando datos";
+		toggle_btn.title="Cargando";
+	});
+sonidoMain.addEventListener("loadedmetadata", () => {
+		toggle_btn.innerHTML="Audio cargado, pulse para reproducir";
+		toggle_btn.title="atención";
 	});
 
 function playPause() {
