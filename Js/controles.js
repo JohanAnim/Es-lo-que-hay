@@ -154,6 +154,11 @@ function speak(str) {
 function audioRate(value) {
 	let values = {"0":0.75, "10":0.80, "20":0.85, "30":0.90, "40":0.95, "50":1.0, "60":1.1, "70":1.2, "80":1.3, "90":1.4, "100":1.5};
 	sonidoMain.playbackRate = values[value];
+	if (sonidoMain.playbackRate  == 0.75) speak("Muy lento")
+	if (sonidoMain.playbackRate  == 0.90) speak("Lento")
+	if (sonidoMain.playbackRate  == 1) speak("Velosidad normal")
+	if (sonidoMain.playbackRate  == 1.2) speak("Rápido");
+	if (sonidoMain.playbackRate  == 1.5) speak("muy rápido");
 }
 
 function volumeUp() {
@@ -166,11 +171,12 @@ function volumeUp() {
 }
 
 function volumeDown() {
-	if (audio_volume > 0.1) {
+	if (audio_volume > 0.2) {
 		audio_volume -= 0.1;
 		sonidoMain.volume = audio_volume;
 	} else {
 		speak("Volúmen mínimo");
+		navigator.vibrate(500);
 	}
 }
 
