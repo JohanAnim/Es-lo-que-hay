@@ -29,6 +29,9 @@ toggle_btn.focus()
 	toggle_mute = document.querySelector("#toggle_mute");
 	volume_down = document.querySelector("#down");
 
+setTimeout(() => {
+	toggle_btn.click()
+}, 1000);
 // Función que Contiene todos los atajos de teclado y lo asigna a cada botón
 function addHotkeys() {
 	shortcut.add("up", function() {
@@ -187,7 +190,7 @@ function toggleMute() {
 }
 
 function hotkeys(text) {
-	navigator.vibrate([100, 50, 100])
+	window.navigator.vibrate([100, 50, 100])
 	if (text == "Mostrar los atajos del reproductor") {
 		document.getElementById("hksbtn").textContent = "Ocultar los atajos del reproductor";
 		document.getElementById("hks").removeAttribute("style");
