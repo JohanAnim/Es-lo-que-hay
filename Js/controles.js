@@ -6,14 +6,6 @@ var sonidoMain, audio_volume = 1.0, toggle_btn, back_btn, time_p, advance_btn, a
 //ejecutamos las instrucciones al terminar de cargarse el documento
 
 document.addEventListener("DOMContentLoaded", function () {
-if (sonidoMain.paused == false) {
-	toggle_btn.innerHTML= "Pausar";
-	toggle_btn.focus();
-}
-else {
-	toggle_btn.innerHTML= "Reproducir";
-	toggle_btn.focus();
-}
 
 	// creamos un array con todos los elementos  de audio
 	var elements = document.querySelectorAll("audio");
@@ -105,6 +97,10 @@ advance_btn.setAttribute("aria-keyshortcuts", "Flecha derecha");
 	sonidoMain.addEventListener("pause", () => {
 		toggle_btn.innerHTML="Reproducir"
 		toggle_btn.title="Reproducir";
+	});
+	sonidoMain.addEventListener("play", () => {
+		toggle_btn.innerHTML="Pausar"
+		toggle_btn.title="Pausar";
 	});
 
 function playPause() {
