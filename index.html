@@ -10,9 +10,9 @@
 <body>
     <header class="header">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenu" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Más opciones</button>
-            <div class="dropdown-menu" " aria-labelledby="dropdownmenu" role="menu">
-            <a class="dropdown-item" href="index.html" role="menuitem">Inicio</a>
+            <button class="btn btn-secondary dropdown-toggle dropdown-toggle-right" type="button" id="dropdownmenu" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Más opciones</button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownmenu" role="menu">
+            <a class="dropdown-item" href="index.html" role="menuitem" title="Ba a la página principal">Inicio</a>
             <a class="dropdown-item" href="#" role="menuitem">Contacto</a>
             <a class="dropdown-item" href="#" role="menuitem">Acerca de</a>
             </div>
@@ -22,21 +22,32 @@
     <main class="main">
         <h1 class="home">Bienvenidos a la trasmición en vivo de tú radio: Es lo que hay.</h1>
     </main>
-
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Modal1">Mostrar los atajos del reproductor</button><br>
     <div class="controles" tabindex="0" aria-label="Aria de Atajos de teclado" role="application"></div>
         <audio src="https://vps-c0159cbc.vps.ovh.ca:7008/;" >Su navegador no es compatible con audio html5</audio>
-        <div>
-            <div class="buttons_list" role="group" aria-label="Controles de reproducción">
-                <button id="hksbtn" onClick='hotkeys(this.textContent)'>Mostrar los atajos del reproductor</button><br>
-                <div id="hks" style="display:none;">
-                    <p>Una vez pulsado el botón de reproducción por primera vez, están disponibles los siguientes atajos:</p>
-                    <p>Adelantar; (Flecha derecha)</p>
-                    <p>Retroceder; (Flecha hisquierda)</p>
-                    <p>Subir volúmen; (Flecha arriba)</p>
-                    <p>Bajar volúmen; (Flecha abajo)</p>
-                    <p>Silenciar y quitar silencio; (m)</p>
-                    <p>Verbalizar el tiempo actual y total del audio en curso; (Alt+i)</p>
+
+        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!-- Inicio de la ventana modal -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Atajos de teclas rápidas</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar esta ventana">
+                        <span aria-hidden="true" >×</span>
+                        </button>
+                        </div>
+                    <div class="modal-body">
+                        <p>Una vez pulsado el botón de reproducción por primera vez, están disponibles los siguientes atajos:</p>
+                        <p>Adelantar; (Flecha derecha)</p>
+                        <p>Retroceder; (Flecha hisquierda)</p>
+                        <p>Subir volúmen; (Flecha arriba)</p>
+                        <p>Bajar volúmen; (Flecha abajo)</p>
+                        <p>Silenciar y quitar silencio; (m)</p>
+                        <p>Verbalizar el tiempo actual y total del audio en curso; (Alt+i)</p>
+                    </div>
                 </div>
+            </div>
+        </div>
                 <div>
                 <button style="text-align: center;" id="toggle" onClick='playPause();'>Reproducir</button>
                 <button style="text-align: left;" id="back" onClick='timeBack();'>Retroceder 10 segundos</button>
