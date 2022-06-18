@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envío de formulario por WhatsApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <form id="formulario" class="formulario">
+        <h1>Envío de formulario por WhatsApp</h1>
+        <div class="box-input">
+            <input name="nombre" id="nombre" type="text" required>
+            <span data-placeholder="Escriba su Nombre"></span>
+        </div>
+        <div class="box-input">
+            <input name="apellidos" id="apellidos" type="text" required>
+            <span data-placeholder="Escriba sus Apellidos"></span>
+        </div>
+        <div class="box-input">
+            <input name="email" id="email" type="email" required>
+            <span data-placeholder="Escriba su Correo Electrónico"></span>
+        </div>
+        <button id="submit" type="submit" class="boton"><i class="fab fa-whatsapp"></i> Enviar WhatsApp</button>
+    </form>
+
+    <script type="text/javascript">
+        $(".box-input input").on("focus", function(){
+            $(this).addClass("focus");
+        });
+
+        $(".box-input input").on("blur", function(){
+            if($(this).val() == ""){
+                $(this).removeClass("focus");
+            }
+        });
+
+    </script>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="whatsapp.js"></script>
+</body>
+</html>
