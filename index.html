@@ -5,10 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escucha en vivo * Radio Es lo que hay.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <main>
-        <h1>Bienvenidos a la trasmición en vivo de tú radio: Es lo que hay.</h1>
+    <header class="header">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenu" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Más opciones</button>
+            <div class="dropdown-menu" " aria-labelledby="dropdownmenu" role="menu">
+            <a class="dropdown-item" href="index.html" role="menuitem">Inicio</a>
+            <a class="dropdown-item" href="#" role="menuitem">Contacto</a>
+            <a class="dropdown-item" href="#" role="menuitem">Acerca de</a>
+            </div>
+            </div>
+    </header>
+
+    <main class="main">
+        <h1 class="home">Bienvenidos a la trasmición en vivo de tú radio: Es lo que hay.</h1>
     </main>
 
     <div class="controles" tabindex="0" aria-label="Aria de Atajos de teclado" role="application"></div>
@@ -45,6 +57,7 @@
 
     <!-- Librerías de js -->
     <script src="Js/atajo/shortcut.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>  
     <script src="Js/controles.js"></script>
 </body>
 </html>
